@@ -10,20 +10,19 @@ export const GlobalStyle = createGlobalStyle`
 
 
     body {
-      background: ${({ theme }) => theme["base-background"]};
-      color: ${({ theme }) => theme["base-text"]};
+      background: ${({ theme }) => theme.colors["base-background"]};
+      color: ${({ theme }) => theme.colors["base-text"]};
       -webkit-font-smoothing: antialiased;
     }
 
 
     &:focus {
       outline: 0;
-      box-shadow: 0 0 0 0.2rem ${({ theme }) => theme["base-border"]};
+      box-shadow: 0 0 0 0.2rem ${({ theme }) => theme.colors["base-border"]};
     }
 
 
     body, input, textarea, button {
-      font-family: 'Roboto', sans-serif;
-      font-size: 16px;
+      font: 1rem "Nunito", sans-serif;
     }
 `;
