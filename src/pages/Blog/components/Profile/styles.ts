@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const CardProfileWrapper = styled.section`
   display: flex;
@@ -66,7 +66,7 @@ export const CardFooter = styled.div`
   gap: 1rem;
   margin-top: 1rem;
 
-  a {
+  p {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -81,4 +81,24 @@ export const CardFooter = styled.div`
       color: ${({ theme }) => theme.colors["base-subtitle"]};
     }
   }
+`;
+
+const shine = keyframes`
+  to {
+    background-position-x: -200%;
+  }
+`;
+
+interface SkeletonProps {
+  width: string;
+  height: string;
+}
+
+export const SkeletonText = styled.div<SkeletonProps>`
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  border-radius: 4px;
+  background: linear-gradient(90deg, #071422 0%, #0b1b2b 50%, #071422 100%);
+  background-size: 200% 100%;
+  animation: ${shine} 1s infinite linear;
 `;

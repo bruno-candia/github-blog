@@ -3,24 +3,31 @@ import {
   CardFooter,
   CardHeader,
   CardProfileWrapper,
+  SkeletonText,
 } from "./styles";
-import profilePhoto from "../../../../assets/profile.png";
 import {
   ArrowSquareOut,
   Building,
   GithubLogo,
   Users,
 } from "@phosphor-icons/react";
+import { useProfile } from "../../../../hooks/useProfile";
 
 export function Profile() {
+  const { profile } = useProfile();
+
+  if (!profile) {
+    return <Skeleton />;
+  }
+
   return (
     <CardProfileWrapper>
-      <img src={profilePhoto} alt="" />
+      <img src={profile?.avatar_url} alt="" />
 
       <CardContent>
         <CardHeader>
-          <h3>User name</h3>
-          <a href="#">
+          <h3>{profile?.name}</h3>
+          <a href={`https://github.com/${profile?.login}`}>
             <span>
               GITHUB
               <ArrowSquareOut size={12} weight="bold" />
@@ -28,24 +35,56 @@ export function Profile() {
           </a>
         </CardHeader>
 
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+        <p>{profile?.bio}</p>
 
         <CardFooter>
-          <a href="#Github">
+          <p>
             <GithubLogo size={18} weight="fill" />
-            <span>bruncandia</span>
-          </a>
-          <a href="#Job">
+            <span>{profile?.login}</span>
+          </p>
+          <p>
             <Building size={18} weight="fill" />
-            <span>Rocketseat</span>
-          </a>
-          <a href="#Followers">
+            <span>{profile?.company}</span>
+          </p>
+          <p>
             <Users size={18} weight="fill" />
-            <span>1.5k seguidores</span>
-          </a>
+            <span>{profile?.followers} seguidores</span>
+          </p>
+        </CardFooter>
+      </CardContent>
+    </CardProfileWrapper>
+  );
+}
+
+function Skeleton() {
+  return (
+    <CardProfileWrapper>
+      <SkeletonText width="148px" height="148px" />
+
+      <CardContent>
+        <CardHeader>
+          <SkeletonText width="200px" height="1.92rem" />
+        </CardHeader>
+
+        <SkeletonText
+          width="400px"
+          height="3.2rem"
+          style={{ marginTop: "1rem" }}
+        />
+
+        <CardFooter>
+          <p>
+            <GithubLogo size={18} weight="fill" />
+            <SkeletonText width="100px" height="1.6rem" />
+          </p>
+          <p>
+            <Building size={18} weight="fill" />
+            <SkeletonText width="100px" height="1.6rem" />
+          </p>
+          <p>
+            <Users size={18} weight="fill" />
+            <SkeletonText width="100px" height="1.6rem" />
+          </p>
         </CardFooter>
       </CardContent>
     </CardProfileWrapper>
