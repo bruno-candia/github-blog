@@ -12,7 +12,7 @@ export const pages = [
         element: <Blog />,
       },
       {
-        path: "/post",
+        path: "/post/:id",
         element: <Post />,
       },
     ],

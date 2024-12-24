@@ -1,18 +1,29 @@
+import { Tooltip } from "../../../../components/Tooltip";
+import { IGithubUserIssues } from "../../../../services/github/getUserIssues/model/getUserIssueResponse";
 import { IssueCardContainer } from "./styles";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
 
-export function IssueCard() {
+interface IssueCardProps {
+  searchResult: IGithubUserIssues;
+}
+
+export function IssueCard({ searchResult }: IssueCardProps) {
   return (
-    <IssueCardContainer to="/post">
+    <IssueCardContainer to={`/post/${searchResult?.id}`}>
       <div>
-        <h5>JavaScript data types and data structures</h5>
-        <span>Há 1 dia</span>
+        <Tooltip label={searchResult?.title}>
+          <h5>{searchResult?.title}</h5>
+        </Tooltip>
+        <span>
+          {formatDistanceToNow(new Date(searchResult?.created_at), {
+            addSuffix: true,
+            locale: ptBR,
+          })}
+        </span>
       </div>
 
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-        consectetur, erat ut commodo tincidunt, nisl justo varius nunc, eget
-        tempor
-      </p>
+      <p>{searchResult?.body}</p>
     </IssueCardContainer>
   );
 }

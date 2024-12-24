@@ -22,34 +22,42 @@ export function Profile() {
 
   return (
     <CardProfileWrapper>
-      <img src={profile?.avatar_url} alt="" />
+      {profile.avatar_url && <img src={profile?.avatar_url} alt="" />}
 
       <CardContent>
-        <CardHeader>
-          <h3>{profile?.name}</h3>
-          <a href={`https://github.com/${profile?.login}`}>
-            <span>
-              GITHUB
-              <ArrowSquareOut size={12} weight="bold" />
-            </span>
-          </a>
-        </CardHeader>
+        {profile?.name && (
+          <CardHeader>
+            <h3>{profile.name}</h3>
+            <a href={`https://github.com/${profile?.login}`}>
+              <span>
+                GITHUB
+                <ArrowSquareOut size={12} weight="bold" />
+              </span>
+            </a>
+          </CardHeader>
+        )}
 
-        <p>{profile?.bio}</p>
+        {profile?.bio && <p>{profile.bio}</p>}
 
         <CardFooter>
-          <p>
-            <GithubLogo size={18} weight="fill" />
-            <span>{profile?.login}</span>
-          </p>
-          <p>
-            <Building size={18} weight="fill" />
-            <span>{profile?.company}</span>
-          </p>
-          <p>
-            <Users size={18} weight="fill" />
-            <span>{profile?.followers} seguidores</span>
-          </p>
+          {profile?.login && (
+            <p>
+              <GithubLogo size={18} weight="fill" />
+              <span>{profile.login}</span>
+            </p>
+          )}
+          {profile?.company && (
+            <p>
+              <Building size={18} weight="fill" />
+              <span>{profile.company}</span>
+            </p>
+          )}
+          {profile?.followers && (
+            <p>
+              <Users size={18} weight="fill" />
+              <span>{profile.followers} seguidores</span>
+            </p>
+          )}
         </CardFooter>
       </CardContent>
     </CardProfileWrapper>

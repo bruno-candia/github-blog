@@ -1,9 +1,21 @@
+import { Control, Controller } from "react-hook-form";
 import { SearchFormContainer } from "./styles";
+interface SearchFormProps {
+  control: Control<{
+    search: string;
+  }>;
+}
 
-export function SearchForm() {
+export function SearchForm({ control }: SearchFormProps) {
   return (
     <SearchFormContainer>
-      <input type="text" placeholder="Buscar conteúdo" />
+      <Controller
+        name="search"
+        control={control}
+        render={({ field }) => (
+          <input {...field} placeholder="Buscar conteúdo" />
+        )}
+      />
     </SearchFormContainer>
   );
 }

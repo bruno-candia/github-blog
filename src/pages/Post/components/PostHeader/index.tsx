@@ -4,7 +4,7 @@ import {
   CardFooter,
   CardHeader,
   CardHeaderActions,
-  CardProfileWrapper,
+  CardPostWrapper,
 } from "./styles";
 import {
   ArrowSquareOut,
@@ -16,7 +16,7 @@ import {
 
 export function PostHeader() {
   return (
-    <CardProfileWrapper>
+    <CardPostWrapper>
       <CardContent>
         <CardHeader>
           <CardHeaderActions>
@@ -51,6 +51,6 @@ export function PostHeader() {
           </p>
         </CardFooter>
       </CardContent>
-    </CardProfileWrapper>
+    </CardPostWrapper>
   );
 }

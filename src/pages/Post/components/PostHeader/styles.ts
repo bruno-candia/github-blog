@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardProfileWrapper = styled.section`
+export const CardPostWrapper = styled.section`
   background: ${({ theme }) => theme.colors["base-profile"]};
   padding: 2rem 2.5rem;
   border-radius: 10px;

@@ -4,10 +4,11 @@ export interface IGetUserData {
   userName: string;
 }
 
-export interface IGetIssues {
+export interface IGetUserIssues {
   text: string;
   userName: string;
   repository: string;
+  signal?: AbortSignal;
 }
 
 export const GITHUB_API_SERVICE_ENDPOINTS = {
@@ -16,11 +17,12 @@ export const GITHUB_API_SERVICE_ENDPOINTS = {
       endpoint: "/users/{userName}",
       pathParams: { userName },
     }),
-  GET_ISSUES: ({ text, userName, repository }: IGetIssues) =>
+  GET_USER_ISSUES: ({ text, userName, repository }: IGetUserIssues) =>
     constructEndpoint({
       endpoint: `/search/issues`,
       queryParams: {
-        q: `${text}+repo:${userName}/${repository}`,
+        q: `${text} repo:${userName}/${repository}`,
+        per_page: 10,
       },
     }),
 };

@@ -9,6 +9,8 @@ export const IssueCardContainer = styled(Link)`
   background: ${({ theme }) => theme.colors["base-post"]};
   padding: 2rem;
   text-decoration: none;
+  overflow: hidden;
+  height: 260px;
 
   &:hover {
     transition: box-shadow 0.2s;
@@ -24,6 +26,12 @@ export const IssueCardContainer = styled(Link)`
     h5 {
       ${({ theme }) => theme.fonts.titleM};
       color: ${({ theme }) => theme.colors["base-title"]};
+      text-overflow: ellipsis;
+      white-space: pre-wrap;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
 
     span {
@@ -37,5 +45,11 @@ export const IssueCardContainer = styled(Link)`
   p {
     ${({ theme }) => theme.fonts.textM};
     color: ${({ theme }) => theme.colors["base-text"]};
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
   }
 `;

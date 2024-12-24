@@ -1,10 +1,11 @@
+import { useSearchIssue } from "../../hooks/useSearchIssue";
 import { IssueCard } from "./components/IssueCard";
 import { Profile } from "./components/Profile";
 import { SearchForm } from "./components/SearchForm";
 import { IssueCardsList, SearchFormHeader, SearchFormWrapper } from "./styles";
 
 export function Blog() {
-  const mockDataArray = [1, 2, 3, 4, 5, 6];
+  const { control, searchResult } = useSearchIssue();
 
   return (
     <>
@@ -12,13 +13,16 @@ export function Blog() {
       <SearchFormWrapper>
         <SearchFormHeader>
           <h4>Publicações</h4>
-          <p>6 Publicações</p>
+          <p>
+            {searchResult?.total_count ? searchResult.total_count : 0}{" "}
+            Publicações
+          </p>
         </SearchFormHeader>
-        <SearchForm />
+        <SearchForm control={control} />
       </SearchFormWrapper>
       <IssueCardsList>
-        {mockDataArray.map((item) => (
-          <IssueCard key={item} />
+        {searchResult?.items.map((item) => (
+          <IssueCard key={item.id} searchResult={item} />
         ))}
       </IssueCardsList>
     </>

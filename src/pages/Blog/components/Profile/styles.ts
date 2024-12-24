@@ -5,6 +5,7 @@ export const CardProfileWrapper = styled.section`
   background: ${({ theme }) => theme.colors["base-profile"]};
   padding: 2rem 2.5rem;
   border-radius: 10px;
+  width: 100%;
   gap: 2rem;
 
   img {
@@ -24,6 +25,7 @@ export const CardContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  width: 100%;
 `;
 
 export const CardHeader = styled.div`
