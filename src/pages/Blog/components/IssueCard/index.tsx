@@ -10,7 +10,7 @@ interface IssueCardProps {
 
 export function IssueCard({ searchResult }: IssueCardProps) {
   return (
-    <IssueCardContainer to={`/post/${searchResult?.id}`}>
+    <IssueCardContainer to={`/post/${searchResult?.number}`}>
       <div>
         <Tooltip label={searchResult?.title}>
           <h5>{searchResult?.title}</h5>

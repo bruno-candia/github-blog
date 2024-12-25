@@ -13,8 +13,15 @@ import {
   ChatCircle,
   GithubLogo,
 } from "@phosphor-icons/react";
+import { IGetIssueInfoResponse } from "../../../../services/github/getIssueInfo/model/getUserIssueResponse";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
 
-export function PostHeader() {
+interface PostHeaderProps {
+  issue: IGetIssueInfoResponse | undefined;
+}
+
+export function PostHeader({ issue }: PostHeaderProps) {
   return (
     <CardPostWrapper>
       <CardContent>
@@ -26,28 +33,35 @@ export function PostHeader() {
                 VOLTAR
               </span>
             </Link>
-            <a href="#">
+            <a href={issue?.html_url} target="_blank" rel="noreferrer">
               <span>
                 VER NO GITHUB
                 <ArrowSquareOut size={12} weight="bold" />
               </span>
             </a>
           </CardHeaderActions>
-          <h3>JavaScript data types and data structures</h3>
+          <h3>{issue?.title}</h3>
         </CardHeader>
 
         <CardFooter>
           <p>
             <GithubLogo size={18} weight="fill" />
-            <span>fulanoDeTal</span>
+            <span>{issue?.user.login}</span>
           </p>
           <p>
             <Calendar size={18} weight="fill" />
-            <span>Há 1 dia</span>
+            <span>
+              {" "}
+              {issue?.created_at &&
+                formatDistanceToNow(new Date(issue.created_at), {
+                  addSuffix: true,
+                  locale: ptBR,
+                })}
+            </span>
           </p>
           <p>
             <ChatCircle size={18} weight="fill" />
-            <span>5 Comentários</span>
+            <span>{issue?.comments} Comentários</span>
           </p>
         </CardFooter>
       </CardContent>

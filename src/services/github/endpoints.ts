@@ -11,6 +11,12 @@ export interface IGetUserIssues {
   signal?: AbortSignal;
 }
 
+export interface IGetIssueInfo {
+  userName: string;
+  repository: string;
+  issueNumber: number;
+}
+
 export const GITHUB_API_SERVICE_ENDPOINTS = {
   GET_USER_DATA: ({ userName }: IGetUserData) =>
     constructEndpoint({
@@ -24,5 +30,10 @@ export const GITHUB_API_SERVICE_ENDPOINTS = {
         q: `${text} repo:${userName}/${repository}`,
         per_page: 10,
       },
+    }),
+  GET_ISSUE_INFO: ({ userName, repository, issueNumber }: IGetIssueInfo) =>
+    constructEndpoint({
+      endpoint: `/repos/{userName}/{repository}/issues/{issueNumber}`,
+      pathParams: { userName, repository, issueNumber },
     }),
 };
